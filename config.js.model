@@ -1,0 +1,13 @@
+const config = {
+    appTitle: 'Title of you codex blog',
+    firebase: {
+        apiKey: 'xxx',
+        authDomain: 'xxx.firebaseapp.com',
+        databaseURL: 'https://xxx.firebaseio.com',
+        projectId: 'xxx',
+        storageBucket: 'xxx',
+        messagingSenderId: 'xxx',
+    },
+};
+
+module.exports = config;

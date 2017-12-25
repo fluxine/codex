@@ -1,0 +1,37 @@
+@import "~@blueprintjs/core/lib/less/variables";
+
+@avatar-height: 1.5 * @pt-navbar-height;
+
+.navbar {
+  user-select: none;
+}
+
+.item {
+  cursor: pointer;
+  margin: 0 0 0 20px;
+  color: @pt-icon-color;
+  &:hover {
+    color: @pt-icon-color-hover	;
+  }
+  &.active {
+    cursor: default;
+    color: @pt-dark-icon-color-selected;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.userDisplayName {
+  padding: 0 20px;
+}
+
+.avatar {
+  height: @avatar-height;
+  border-radius: @avatar-height/2;
+  box-shadow: @pt-elevation-shadow-2;
+}
+
+.avatarPopover {
+  padding: 1em;
+}

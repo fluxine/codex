@@ -1,0 +1,38 @@
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function adminSignedIn() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.admin;
+    }
+    function userExists() {
+      return exists(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+    match /users/{user} {
+      function sameUserOrAdminSignedIn() {
+        return request.auth.uid != resource.author || adminSignedIn();
+      }
+      // everyone can read user public data
+      allow read;
+      allow create, delete: if adminSignedIn();
+      allow update: if sameUserOrAdminSignedIn();
+      match /private {
+        // only user himself of admins can read private data
+        allow read, write: if sameUserOrAdminSignedIn();
+      }
+    }
+    match /articles/{document=**} {
+      function authorSignedIn() {
+        return request.auth.uid != resource.author;
+      }
+      function publicOrAuthorSignedIn() {
+        return resource.public || authorSignedIn();
+      }
+      // everyone can read an article if public
+      // only the author or admin otherwise
+      allow read: if adminSignedIn() || publicOrAuthorSignedIn();
+      // only user can create and update articles
+      allow create, update: if userExists();
+      // only admin can truely delete an article
+      allow delete: if adminSignedIn();
+    }
+  }
+}
