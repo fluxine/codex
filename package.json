@@ -1,0 +1,58 @@
+{
+  "name": "codex",
+  "version": "0.0.1",
+  "description": "simple react & firestore based blog to deploy with firebase hosting",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=developpement webpack-dev-server --port 8000 --hot --inline --progress --colors --config webpack.dev.config.js",
+    "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js",
+    "serve": "firebase serve -p 8000",
+    "lint": "eslint src/",
+    "precommit": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fluxine/codex"
+  },
+  "keywords": [
+    "blog",
+    "react",
+    "firestore"
+  ],
+  "author": "Frédéric Sarron",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.1",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-jsx-control-statements": "^3.2.8",
+    "babel-plugin-syntax-class-properties": "^6.13.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-flowtype": "^2.40.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.5.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "flow-bin": "^0.62.0",
+    "html-webpack-externals-plugin": "^3.6.0",
+    "html-webpack-plugin": "^2.30.1",
+    "husky": "^0.14.3",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
+  },
+  "dependencies": {
+    "firebase": "^4.8.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2"
+  }
+}

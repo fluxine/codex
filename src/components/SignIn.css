@@ -1,0 +1,7 @@
+.signedIn {
+    color: green;
+}
+
+.signedOut {
+    color: grey;
+}
