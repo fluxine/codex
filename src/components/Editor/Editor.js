@@ -5,7 +5,7 @@ import {
     Link,
 } from 'react-router-dom';
 
-import type ContextRouter from 'react-router-dom';
+import type { ContextRouter } from 'react-router-dom';
 
 import Articles from './Articles';
 

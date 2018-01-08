@@ -15,6 +15,9 @@ module.exports = {
     "globals": {
         // jsx-control-statements
         "If": false,
+        "Choose": false,
+        "When": false,
+        "Otherwise": false,
     },
     "plugins": [
         "react",

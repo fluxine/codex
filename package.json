@@ -4,7 +4,7 @@
   "description": "simple react & firestore based blog to deploy with firebase hosting",
   "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=developpement webpack-dev-server --port 8000 --hot --inline --progress --colors --config webpack.dev.config.js",
+    "start": "NODE_ENV=developpement webpack-dev-server --port 8000 --hot --inline --progress --colors --history-api-fallback --config webpack.dev.config.js",
     "build": "NODE_ENV=production webpack --config ./webpack.prod.config.js",
     "serve": "firebase serve -p 8000",
     "lint": "eslint src/",
@@ -48,11 +48,15 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "@firebase/app": "^0.1.5",
+    "@firebase/auth": "^0.3.1",
+    "@firebase/firestore": "^0.2.2",
     "firebase": "^4.8.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "semantic-ui-react": "^0.77.1"
   }
 }
