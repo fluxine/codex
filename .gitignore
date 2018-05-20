@@ -5,3 +5,4 @@ flow-typed/
 public/
 config.js
 package-lock.json
+.firebaserc
