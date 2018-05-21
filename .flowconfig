@@ -1,5 +1,5 @@
 [ignore]
-./node_modules/jsx-control-statements/jsx-control-statements.flow.js
+./node_modules/babel-plugin-jsx-control-statements/jsx-control-statements.flow.js
 
 [libs]
-./node_modules/jsx-control-statements/jsx-control-statements.latest.flow.js
+./node_modules/babel-plugin-jsx-control-statements/jsx-control-statements.latest.flow.js

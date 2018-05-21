@@ -41,5 +41,6 @@ firebase deploy
 ```
 npm i -g flow-typed
 flow-typed install react-router-dom@4.2.2
+flow-typed install firebase@4
 npm run start
 ```

@@ -39,20 +39,26 @@
     "eslint-plugin-jsx-a11y": "^6.0.2",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.11",
     "flow-bin": "^0.62.0",
     "html-webpack-externals-plugin": "^3.6.0",
     "html-webpack-plugin": "^2.30.1",
     "husky": "^0.14.3",
+    "resolve-url-loader": "^2.3.0",
     "style-loader": "^0.19.1",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "firebase": "^4.8.1",
+    "font-awesome": "^4.7.0",
+    "primereact": "^1.5.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
+    "react-transition-group": "^2.3.1",
     "redux": "^3.7.2"
   }
 }

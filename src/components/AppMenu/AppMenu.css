@@ -1,0 +1,7 @@
+.menu :global(.ui-sidebar-close) {
+  display: none;
+}
+
+.menu:global(.ui-sidebar-top) {
+  height: 10em;
+}

@@ -17,6 +17,9 @@ config.module.rules.push({
           loader: 'css-loader',
           options: {
             modules: true,
+            /*alias: {
+              "../fonts/bootstrap": "bootstrap-sass/assets/fonts/bootstrap"
+            },*/
             localIdentName: '[path][name]__[local]--[hash:base64:5]'
           }
         }
