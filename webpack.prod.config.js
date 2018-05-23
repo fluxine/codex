@@ -1,27 +1,41 @@
 /* eslint-disable */
-const config = Object.assign({}, require('./webpack.common.config.js'));
+const merge = require('webpack-merge');
+const common = require('./webpack.common.config.js');
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-config.devtool = 'source-map';
-config.plugins.unshift(new ExtractTextPlugin({
-  filename: '[name].css'
-}));
-
-config.module.rules.push({
-  test: /\.css$/,
-  use: ExtractTextPlugin.extract({
-      fallback: 'style-loader',
-      use: [
+module.exports = merge.strategy({ plugins: 'prepend' })(
+  common, {
+    devtool: 'source-map',
+    plugins: [
+      new ExtractTextPlugin({
+        filename: '[name].css'
+      })
+    ],
+    module: {
+      rules: [
         {
-          loader: 'css-loader',
-          options: {
-            modules: true,
-            localIdentName: '[path][name]__[local]--[hash:base64:5]'
-          }
-        }
-      ]
-  })
-});
-
-module.exports = config; 
+          test: /\.less$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              {
+                loader: 'css-loader',
+                options: {
+                  modules: true,
+                  sourceMap: true,
+                  localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                },
+              },
+              {
+                loader: 'less-loader',
+                options: {
+                  sourceMap: true,
+                },
+              },
+            ],
+          }),
+        },
+      ],
+    },
+  });

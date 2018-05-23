@@ -1,20 +1,31 @@
 /* eslint-disable */
-const config = Object.assign({}, require('./webpack.common.config.js'));
+const merge = require('webpack-merge');
+const common = require('./webpack.common.config.js');
 
-config.devtool = 'eval-source-map';
-
-config.module.rules.push({
-  test: /\.css$/,
-  use: [
-    'style-loader',
-    {
-      loader: 'css-loader',
-      options: {
-        modules: true,
-        localIdentName: '[path][name]__[local]--[hash:base64:5]'
-      }
-    }
-  ]
+module.exports = merge(common, {
+  devtool : 'eval-source-map',
+  module: {
+    rules: [
+      {
+        test: /\.less$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+        ]
+      },
+    ],
+  }
 });
-
-module.exports = config; 

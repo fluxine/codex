@@ -15,6 +15,9 @@ module.exports = {
     "globals": {
         // jsx-control-statements
         "If": false,
+        "Choose": false,
+        "When": false,
+        "Otherwise": false,
     },
     "plugins": [
         "react",
@@ -27,9 +30,10 @@ module.exports = {
     },
     "rules": {
         "no-debugger": "warn",
+        "padded-blocks": ["error", { "classes": "always" }],
         "indent": [
             "error",
-            4
+            2
         ],
         "linebreak-style": [
             "error",
@@ -45,7 +49,8 @@ module.exports = {
         ],
         "react/jsx-no-undef": ["error", { "allowGlobals": true }],
         "react/jsx-uses-vars": "error",
-        "react/jsx-indent": [ "error", 4],
+        "react/jsx-indent": [ "error", 2],
+        "react/jsx-indent-props": [ "error", 2],
         "react/jsx-filename-extension": [ "warn", { "extensions": [".js", ".jsx"] }],
         "jsx-a11y/click-events-have-key-events" : "off",
         "jsx-a11y/anchor-is-valid": [ "error", {

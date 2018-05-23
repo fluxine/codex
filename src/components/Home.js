@@ -7,10 +7,12 @@ type Props = {
 } & ContextRouter;
 
 class Home extends React.Component<Props> {
-    state = {}
-    render() {
-        return <h2>Home</h2>;
-    }
+
+  state = {}
+  render() {
+    return <h1>Home</h1>;
+  }
+
 }
 
 export default Home;
