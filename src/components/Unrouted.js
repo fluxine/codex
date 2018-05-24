@@ -1,9 +1,7 @@
 // @flow
 import * as React from 'react';
 
-type Props = {||}
-
-const Unrouted = (props: Props) => (
+const Unrouted = () => (
   <h1>Unrouted</h1>
 );
 

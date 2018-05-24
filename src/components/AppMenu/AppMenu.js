@@ -2,15 +2,37 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import firebase, { type FirebaseUser } from 'firebase';
-import { withRouter, type ContextRouter } from 'react-router-dom';
-import { Navbar, Button, Alignment } from '@blueprintjs/core';
+import { withRouter, NavLink, type ContextRouter } from 'react-router-dom';
+import { Navbar, Alignment, Icon } from '@blueprintjs/core';
 
 import styles from './AppMenu.less';
+
+type MenuItemProps = {
+  to: string,
+  icon: string,
+  exact?: boolean,
+}
+
+const MenuItem = (props: MenuItemProps): React.Node => (
+  <NavLink
+    to={props.to}
+    exact={props.exact}
+    className={styles.item}
+    activeClassName={styles.active}
+  >
+    <Icon icon={props.icon} iconSize={20} />
+  </NavLink>
+);
+
+MenuItem.defaultProps = {
+  exact: false,
+};
 
 type Props = {|
   ...ContextRouter,
   title: string,
   // injected
+  authStateIsKnown: boolean,
   user: FirebaseUser,
 |}
 
@@ -36,26 +58,29 @@ class AppMenu extends React.Component<Props> {
   }
 
   render() {
-    const { user, title } = this.props;
+    const { user, authStateIsKnown, title } = this.props;
+    const signedIn = authStateIsKnown && !!user;
     return (
-      <Navbar fixedToTop>
+      <Navbar fixedToTop className={styles.navbar}>
         <Navbar.Group align={Alignment.LEFT}>
           <Navbar.Heading>{title}</Navbar.Heading>
           <Navbar.Divider />
-          <Button className="pt-minimal" icon="home" text="Home" onClick={this.navigateTo('/')} />
-          <If condition={!!user}>
-            <Button className="pt-minimal" icon="document" text="Editor" onClick={this.navigateTo('/edit')} />
+          <MenuItem to="/" icon="home" exact />
+          <If condition={signedIn}>
+            <MenuItem to="/edit" icon="edit" />
           </If>
         </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>
           <Choose>
-            <When condition={!!user}>
-              <p className={styles.signedIn}>Signed in as {user.displayName}</p>
-              <button onClick={this.signOut}>SIGN OUT</button>
+            <When condition={signedIn}>
+              <div className={styles.userDisplayName}>{user.displayName}</div>
+              <If condition={!!user.photoURL}>
+                <img alt="signed-in user avatar" src={user.photoURL} className={styles.avatar} />
+              </If>
+              <Icon icon="log-out" iconSize={20} className={styles.item} onClick={this.signOut} />
             </When>
             <Otherwise>
-              <p className={styles.signedOut}>Signed out</p>
-              <button onClick={this.signIn}>SIGN IN</button>
+              <Icon icon="log-in" iconSize={20} className={styles.item} onClick={this.signIn} />
             </Otherwise>
           </Choose>
         </Navbar.Group>
@@ -65,6 +90,6 @@ class AppMenu extends React.Component<Props> {
 
 }
 
-const map = ({ auth: { user } }) => ({ user });
+const map = ({ auth: { user, authStateIsKnown } }) => ({ user, authStateIsKnown });
 
-export default connect(map)(withRouter(AppMenu));
+export default withRouter(connect(map)(AppMenu));

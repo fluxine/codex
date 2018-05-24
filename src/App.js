@@ -15,9 +15,9 @@ import { login, logout } from './actions/auth';
 import type AppState from './AppState';
 
 import AppMenu from './components/AppMenu/AppMenu';
-import Unrouted from './Unrouted';
+import Unrouted from './components/Unrouted';
 
-import styles from './App.less';
+// import styles from './App.less';
 
 type Props = {
     config: {
@@ -67,11 +67,9 @@ class App extends React.Component<Props> {
 
   props: Props
 
-
   render() {
     return [
       <AppMenu key="menu" title={this.props.config.appTitle} />,
-      <div className={styles.test}>test</div>,
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/edit" component={Editor} />

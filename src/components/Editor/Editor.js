@@ -8,11 +8,13 @@ import {
 } from 'react-router-dom';
 import { type FirebaseUser } from 'firebase';
 
+import WaitingForAuthState from '../WaitingForAuthState';
 import Articles from './Articles';
 
 type Props = {|
     ...ContextRouter,
   // injected
+  authStateIsKnown: boolean,
   user: FirebaseUser,
 |};
 
@@ -20,7 +22,8 @@ class Editor extends React.Component<Props> {
 
   state = {}
   render() {
-    const { user } = this.props;
+    const { user, authStateIsKnown } = this.props;
+    if (!authStateIsKnown) return <WaitingForAuthState />;
     if (!user) return <Redirect to="/" />;
     return (
       <div>
@@ -35,6 +38,6 @@ class Editor extends React.Component<Props> {
 
 }
 
-const map = ({ auth: { user } }) => ({ user });
+const map = ({ auth: { user, authStateIsKnown } }) => ({ user, authStateIsKnown });
 
 export default connect(map)(Editor);
