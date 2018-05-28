@@ -6,27 +6,7 @@ import { withRouter, NavLink, type ContextRouter } from 'react-router-dom';
 import { Navbar, Alignment, Icon } from '@blueprintjs/core';
 
 import styles from './AppMenu.less';
-
-type MenuItemProps = {
-  to: string,
-  icon: string,
-  exact?: boolean,
-}
-
-const MenuItem = (props: MenuItemProps): React.Node => (
-  <NavLink
-    to={props.to}
-    exact={props.exact}
-    className={styles.item}
-    activeClassName={styles.active}
-  >
-    <Icon icon={props.icon} iconSize={20} />
-  </NavLink>
-);
-
-MenuItem.defaultProps = {
-  exact: false,
-};
+import userNoPhoto from './userNoPhoto.png';
 
 type Props = {|
   ...ContextRouter,
@@ -63,20 +43,32 @@ class AppMenu extends React.Component<Props> {
     return (
       <Navbar fixedToTop className={styles.navbar}>
         <Navbar.Group align={Alignment.LEFT}>
-          <Navbar.Heading>{title}</Navbar.Heading>
-          <Navbar.Divider />
-          <MenuItem to="/" icon="home" exact />
-          <If condition={signedIn}>
-            <MenuItem to="/edit" icon="edit" />
-          </If>
+          <Navbar.Heading>
+            <NavLink
+              to="/"
+              exact
+              className={styles.item}
+              activeClassName={styles.active}
+            >
+              {title}
+            </NavLink>
+          </Navbar.Heading>
         </Navbar.Group>
         <Navbar.Group align={Alignment.RIGHT}>
           <Choose>
             <When condition={signedIn}>
-              <div className={styles.userDisplayName}>{user.displayName}</div>
-              <If condition={!!user.photoURL}>
-                <img alt="signed-in user avatar" src={user.photoURL} className={styles.avatar} />
-              </If>
+              <NavLink
+                to="/edit"
+                exact
+                className={styles.item}
+                activeClassName={styles.active}
+                style={{ marginRight: '20px' }}
+              >
+                <Icon icon="edit" iconSize={20} />
+              </NavLink>
+              <NavLink to="/me" exact activeClassName={styles.active}>
+                <img alt="signed-in user avatar" src={user.photoURL || userNoPhoto} className={styles.avatar} />
+              </NavLink>
               <Icon icon="log-out" iconSize={20} className={styles.item} onClick={this.signOut} />
             </When>
             <Otherwise>

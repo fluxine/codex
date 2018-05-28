@@ -1,0 +1,20 @@
+@import "~@blueprintjs/core/lib/less/variables";
+
+@maxLinewidth: 40em;
+@sheetPadding: 2em;
+
+.sheet {
+  //padding-top: @pt-navbar-height;
+  background-color: @light-gray5;
+  @media screen and (min-width: @maxLinewidth + 2 * @sheetPadding) {
+    margin: auto;
+    width: @maxLinewidth;
+  }
+  >.padder {
+    padding: @sheetPadding;
+    p {
+      text-align: justify;
+    }
+  }
+}
+

@@ -1,0 +1,71 @@
+*********************************************************************************************
+*** User information page : /me
+*********************************************************************************************
+  - accessed by clicking on avatar in menubar
+  - author ?
+    - no
+      - button for requesting author account + explanation paragraph
+        click =>
+          - create author with
+            - id: same id as logged user
+            - status : 'applying'
+            - grab displayName, firstname ... etc
+    - yes
+      - status (applying, admitted)
+      - displayName: modifiable : pseudo as displayed on public side
+
+*********************************************************************************************
+*** Editor home : /edit
+*********************************************************************************************
+  - button 'new article'
+  - list of articles : title, createdAt, updatedAt : sortable
+    - click on row => navigate to article editor
+    - infinite scroll
+
+*********************************************************************************************
+*** Editor home : /edit/article/:id
+*********************************************************************************************
+  - version selector:
+    - list of versions : version number, comment, online/offline (readonly)
+      - click on row : update edition panel
+    - button 'create version'
+      => create new version : clone of latest version then update edition panel
+  - edition panel : initialized with latest version
+    - fields :
+      - status : offline, online
+        - put offline => ask confirmation
+        - put online => if not last version : ask confirmation
+      - title
+      - contents
+      - link to preview
+        => open new window on /article/:id/version/:versionNumber
+
+*********************************************************************************************
+*** Article page : /article/:id(/version/:versionNumber)?
+*********************************************************************************************
+  - if versionNumber
+    - if user is authenticated and is the author of the article :
+      - display article in requested version
+    - else 404 (401, 403?)
+  - else display article
+
+
+*********************************************************************************************
+*** Seach Engine Optimization
+*********************************************************************************************
+- ensure search engines correctly sees articles
+
+*********************************************************************************************
+*** Offline edition mode
+*********************************************************************************************
+- being able to save article locally and synchronize on network up
+
+*********************************************************************************************
+*** Mobile Devices
+*********************************************************************************************
+- simplified UI
+
+*********************************************************************************************
+*** Misc
+*********************************************************************************************
+- @media print

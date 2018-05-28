@@ -7,17 +7,22 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
+import { FocusStyleManager } from '@blueprintjs/core';
 
-import Home from './components/Home';
-import Editor from './components/Editor/Editor';
+import PageWrapper from './components/pages/PageWrapper';
+import Unrouted from './components/pages/Unrouted';
+import Home from './components/pages/Home';
+import UserInfo from './components/pages/UserInfo';
+import Editor from './components/pages/Editor/Editor';
 
 import { login, logout } from './actions/auth';
 import type AppState from './AppState';
 
 import AppMenu from './components/AppMenu/AppMenu';
-import Unrouted from './components/Unrouted';
 
 import './App.less';
+
+FocusStyleManager.onlyShowFocusOnTabs();
 
 type Props = {
     config: {
@@ -33,6 +38,10 @@ type Props = {
     },
 } & DispatchProp<AppState>;
 
+// PageRoute simply insert a route by substituting the component with its wrapped counterpart
+const PageRoute = (routeProps: React.ElementProps<typeof Route>) => (
+  <Route {...routeProps} component={PageWrapper(routeProps.component)} />
+);
 
 class App extends React.Component<Props> {
 
@@ -70,10 +79,11 @@ class App extends React.Component<Props> {
   render() {
     return [
       <AppMenu key="menu" title={this.props.config.appTitle} />,
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/edit" component={Editor} />
-        <Route component={Unrouted} />
+      <Switch key="routing">
+        { PageRoute({ path: '/', component: Home, exact: true }) }
+        { PageRoute({ path: '/me', component: UserInfo, exact: true }) }
+        { PageRoute({ path: '/edit', component: Editor }) }
+        { PageRoute({ component: Unrouted }) }
       </Switch>,
     ];
   }

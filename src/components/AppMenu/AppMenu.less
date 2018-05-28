@@ -15,23 +15,24 @@
   }
   &.active {
     cursor: default;
-    color: @pt-dark-icon-color-selected;
+    color: @pt-icon-color-selected;
     &:hover {
       text-decoration: none;
     }
   }
 }
 
-.userDisplayName {
-  padding: 0 20px;
-}
-
-.avatar {
-  height: @avatar-height;
-  border-radius: @avatar-height/2;
-  box-shadow: @pt-elevation-shadow-2;
-}
-
-.avatarPopover {
-  padding: 1em;
+a {
+  .avatar {
+    background-color: @pt-app-background-color;
+    height: @avatar-height;
+    border-radius: @avatar-height/2;
+    box-shadow: @pt-elevation-shadow-2;
+    margin-top: 10px;
+  }
+  &.active {
+    .avatar {
+      border: medium solid @pt-icon-color-selected;
+    }
+  }
 }
